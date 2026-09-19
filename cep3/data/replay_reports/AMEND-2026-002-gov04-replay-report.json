@@ -1,0 +1,47 @@
+{
+  "candidate": "AMEND-2026-002",
+  "constraint_traces": [
+    {
+      "action": "remove_invariant",
+      "authority": "GOV-04",
+      "candidate": "AMEND-2026-002",
+      "decision": "BLOCK",
+      "evidence_kind": "controlled-replay",
+      "node": "NODE-094",
+      "reference": "CEP-2-7; PRO-05"
+    },
+    {
+      "action": "narrow_invariant",
+      "authority": "GOV-04",
+      "candidate": "AMEND-2026-002",
+      "decision": "BLOCK",
+      "evidence_kind": "controlled-replay",
+      "node": "NODE-094",
+      "reference": "CEP-2-7; PRO-05"
+    },
+    {
+      "action": "route_amendment",
+      "authority": "GOV-04",
+      "candidate": "AMEND-2026-002",
+      "decision": "BLOCK",
+      "evidence_kind": "controlled-replay",
+      "node": "NODE-093",
+      "reference": "CEP-1-3; CEP-4-6.1"
+    }
+  ],
+  "evidence_basis": "controlled replay fixture; each trace records a GOV-04 constraint decision",
+  "replay_result": "BLOCKED",
+  "report_sha256": "c1531857ad8c1afd001a94cc5189b603c30382840498ca4fd14923a8ac105929",
+  "report_type": "GOV-04 Replay Surface Report",
+  "sealed_at": "2026-09-19T13:14:50.410904+00:00",
+  "surface": {
+    "tier1": [
+      "NODE-094"
+    ],
+    "tier2": [
+      "NODE-093"
+    ]
+  },
+  "trace_count": 3,
+  "window_days": 30
+}

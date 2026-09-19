@@ -1,0 +1,3 @@
+{"candidate":"AMEND-2026-002","node":"NODE-094","action":"remove_invariant","decision":"BLOCK","authority":"GOV-04","evidence_kind":"controlled-replay","reference":"CEP-2-7; PRO-05"}
+{"candidate":"AMEND-2026-002","node":"NODE-094","action":"narrow_invariant","decision":"BLOCK","authority":"GOV-04","evidence_kind":"controlled-replay","reference":"CEP-2-7; PRO-05"}
+{"candidate":"AMEND-2026-002","node":"NODE-093","action":"route_amendment","decision":"BLOCK","authority":"GOV-04","evidence_kind":"controlled-replay","reference":"CEP-1-3; CEP-4-6.1"}

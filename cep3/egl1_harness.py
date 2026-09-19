@@ -120,6 +120,15 @@ CONFORMANCE = [
 
 DEFAULT_TIER1 = ["NODE-095"]
 
+GOV04_CONFORMANCE = [
+    {"id": "G04-001", "node": "NODE-094", "decision_type": "invariant_mutation",
+     "action": "remove_invariant", "rule": {"mutable": False}, "expected": "BLOCK"},
+    {"id": "G04-002", "node": "NODE-094", "decision_type": "invariant_mutation",
+     "action": "narrow_invariant", "rule": {"mutable": False}, "expected": "BLOCK"},
+    {"id": "G04-003", "node": "NODE-093", "decision_type": "pathway_decision",
+     "action": "route_amendment", "rule": {"mutable": False}, "expected": "NO_EFFECT"},
+]
+
 
 def tier1_for(candidate):
     return ["NODE-094"] if candidate == "AMEND-2026-002" else DEFAULT_TIER1
@@ -195,13 +204,14 @@ def impl_origin(im):
 
 def cmd_conformance():
     impls = discover_impls()
-    print("EGL-1 CONFORMANCE (CEP-2 7(a)) - vectors=%d" % len(CONFORMANCE))
+    vectors = GOV04_CONFORMANCE if getattr(cmd_conformance, "candidate", "") == "AMEND-2026-002" else CONFORMANCE
+    print("EGL-1 CONFORMANCE (CEP-2 7(a)) - vectors=%d" % len(vectors))
     for im in impls:
         if im.get("load_error"):
             print("  %-16s LOAD-FAIL %s" % (im["module"], im["load_error"]))
             continue
         fails = []
-        for v in CONFORMANCE:
+        for v in vectors:
             out = im["run_case"](v)
             if out.get("outcome") != v["expected"]:
                 fails.append((v["id"], v["expected"], out.get("outcome")))
@@ -247,6 +257,16 @@ def default_vectors():
     return vecs
 
 
+def gov04_vectors():
+    return [{k: val for k, val in v.items() if k != "expected"}
+            for v in GOV04_CONFORMANCE] + [
+        {"id": "G04-004", "node": "NODE-094", "decision_type": "invariant_mutation",
+         "action": "reinterpret_invariant", "rule": {"mutable": False}},
+        {"id": "G04-005", "node": "NODE-093", "decision_type": "pathway_decision",
+         "action": "route_amendment", "rule": {"mutable": False}},
+    ]
+
+
 def _append_gate(candidate, stage, outcome_, summary):
     try:
         sys.path.insert(0, BASE)
@@ -266,16 +286,19 @@ def cmd_run(args):
     scope = compute_scope(tier1_for(args.candidate))
     scope_nodes = set(scope["tier1"]) | set(scope["tier2"])
 
-    vectors = default_vectors()
+    vectors = gov04_vectors() if args.candidate == "AMEND-2026-002" else default_vectors()
     if args.vectors and os.path.exists(args.vectors):
         with open(args.vectors, "r", encoding="utf-8") as fh:
             vectors = json.load(fh)
 
-    impls = [im for im in discover_impls() if not im.get("load_error")]
+    required_spec = "gov04-invariant-v1" if args.candidate == "AMEND-2026-002" else "threshold-outcome-v1"
+    impls = [im for im in discover_impls()
+             if not im.get("load_error") and im.get("spec") == required_spec]
     conformance_results = []
     compliant = []
     for im in impls:
-        fails = [v for v in CONFORMANCE
+        conf_vectors = GOV04_CONFORMANCE if args.candidate == "AMEND-2026-002" else CONFORMANCE
+        fails = [v for v in conf_vectors
                  if im["run_case"](v).get("outcome") != v["expected"]]
         status = "COMPLIANT" if not fails else "NON-COMPLIANT"
         conformance_results.append(

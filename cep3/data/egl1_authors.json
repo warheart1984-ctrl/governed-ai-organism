@@ -1,0 +1,10 @@
+{
+  "gov04_house": {
+    "author": "Organ 03 House",
+    "origin": "claimed"
+  },
+  "gov04_independent": {
+    "author": "Independent Reviewer",
+    "origin": "external"
+  }
+}

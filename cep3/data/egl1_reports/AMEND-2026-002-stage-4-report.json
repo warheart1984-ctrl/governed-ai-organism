@@ -1,35 +1,39 @@
 {
   "candidate": "AMEND-2026-002",
   "coverage": {
-    "covered_nodes": [],
-    "tier1_ok": false,
-    "tier2_ok": false
+    "covered_nodes": [
+      "NODE-093",
+      "NODE-094"
+    ],
+    "tier1_ok": true,
+    "tier2_ok": true
   },
   "gate": {
-    "reason": "full-surface coverage incomplete (T1=False T2=False); only drill-reference implementation origin registered (drill-reference); no independent implementation source (CEP-2 7(d))",
-    "result": "REJECT"
+    "reason": "full-surface equivalence across compliant implementations holds",
+    "result": "PASS"
   },
   "impls": [
     {
-      "author": "drill-reference-a",
+      "author": "Organ 03 House",
       "conformance_fails": [],
-      "module": "implementation_a",
+      "module": "gov04_house",
       "status": "COMPLIANT"
     },
     {
-      "author": "drill-reference-b",
+      "author": "Independent Reviewer",
       "conformance_fails": [],
-      "module": "implementation_b",
+      "module": "gov04_independent",
       "status": "COMPLIANT"
     }
   ],
   "independence": {
-    "ok": false,
+    "ok": true,
     "origins": [
-      "drill-reference"
+      "Organ 03 House",
+      "external:Independent Reviewer"
     ]
   },
-  "report_sha256": "d81acf93f2f8b204114eb28a2bf73fa5a1ffbd19a859b0f2a3aa388676b269aa",
+  "report_sha256": "7e862c2e1c9e17e6a2cb207bf6a455e46c24a71d28ad87a6a07126eabcaf362e",
   "report_type": "CEP-1 Stage 4 EGL-1 Equivalence Report",
   "scope_t1": [
     "NODE-094"
@@ -37,9 +41,9 @@
   "scope_t2": [
     "NODE-093"
   ],
-  "sealed_at": "2026-09-19T13:11:56.623820+00:00",
+  "sealed_at": "2026-09-19T13:15:04.178265+00:00",
   "vectors": {
-    "count": 13,
+    "count": 5,
     "divergent_vectors": []
   }
 }

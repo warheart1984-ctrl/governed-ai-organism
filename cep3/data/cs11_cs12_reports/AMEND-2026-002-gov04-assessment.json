@@ -1,0 +1,23 @@
+{
+  "candidate": "AMEND-2026-002",
+  "cs11": {
+    "reason": "The proposal makes the unamendable-invariants boundary amendable.",
+    "value": "Core Governance",
+    "value_consistency": "FUNDAMENTALLY_MISALIGNED"
+  },
+  "cs12": {
+    "drift_axis": "GOV-04 governance-of-governance erosion",
+    "drift_velocity": "BLOCKED",
+    "tier": 3,
+    "trace_count": 3
+  },
+  "dependency_node": "NODE-093",
+  "evidence": {
+    "replay_report_sha256": "c1531857ad8c1afd001a94cc5189b603c30382840498ca4fd14923a8ac105929",
+    "replay_result": "BLOCKED"
+  },
+  "node": "NODE-094",
+  "report_sha256": "80219fa8e29caf38cff0f34f935f5172ae138848423d4e72a7964a559ecc2977",
+  "report_type": "CS-11 and CS-12 GOV-04 First-Class Assessment",
+  "sealed_at": "2026-09-19T13:14:50.770036+00:00"
+}
