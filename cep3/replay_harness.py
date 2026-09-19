@@ -93,6 +93,17 @@ def compute_scope(t1_nodes):
 
 
 def default_rule_model(candidate):
+    if candidate == "AMEND-2026-002":
+        return {
+            "candidate": candidate,
+            "title": "Removal of the unamendable-invariants boundary",
+            "targets": "NODE-094 GOV-04 Unamendable Invariants",
+            "old": {"class": "CORE", "majority": 1.0, "abstentions_allow": False,
+                    "description": "GOV-04 is unamendable; no amendment path exists"},
+            "new": {"class": "CORE", "majority": 0.75, "abstentions_allow": True,
+                    "description": "GOV-04 may be altered by three-quarters majority"},
+            "affected_nodes": ["NODE-094"],
+        }
     return {
         "candidate": candidate,
         "title": "Ratification Threshold Reduction for Core-Class Amendments",

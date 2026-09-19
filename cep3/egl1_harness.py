@@ -93,6 +93,8 @@ SURFACE_EDGES = [
      "type": "Textual", "direction": "Unidirectional"},
     {"id": "EDGE-007", "source": "NODE-092", "target": "NODE-095",
      "type": "Functional", "direction": "Unidirectional"},
+    {"id": "EDGE-003", "source": "NODE-093", "target": "NODE-094",
+     "type": "Functional", "direction": "Unidirectional"},
 ]
 
 CONFORMANCE = [
@@ -117,6 +119,10 @@ CONFORMANCE = [
 ]
 
 DEFAULT_TIER1 = ["NODE-095"]
+
+
+def tier1_for(candidate):
+    return ["NODE-094"] if candidate == "AMEND-2026-002" else DEFAULT_TIER1
 
 
 def now_iso():
@@ -219,7 +225,7 @@ def cmd_impls():
 
 
 def cmd_scope(args):
-    scope = compute_scope(DEFAULT_TIER1)
+    scope = compute_scope(tier1_for(args.candidate))
     print("EGL-1 SCOPE - CEP-4 6.2 (candidate %s)" % args.candidate)
     print("  Tier 1 (directly modified)      : %s" % ", ".join(scope["tier1"]))
     print("  Tier 2 (textual+functional deps): %s" % ", ".join(scope["tier2"]))
@@ -257,7 +263,7 @@ def _append_gate(candidate, stage, outcome_, summary):
 def cmd_run(args):
     _rdir(REPORT_DIR)
     _rdir(VECTOR_DIR)
-    scope = compute_scope(DEFAULT_TIER1)
+    scope = compute_scope(tier1_for(args.candidate))
     scope_nodes = set(scope["tier1"]) | set(scope["tier2"])
 
     vectors = default_vectors()

@@ -1,0 +1,46 @@
+{
+  "candidate": "AMEND-2026-002",
+  "coverage": {
+    "tier1_ok": false,
+    "tier2_missing": [
+      "NODE-093"
+    ],
+    "tier2_ok": false
+  },
+  "evidence_source": "D:\\Jon wierd ideas\\cep3\\data\\replay_evidence\\AMEND-2026-002.jsonl",
+  "gate": {
+    "reason": "fidelity 0.000 < 0.95 gate; Tier 1 scope uncovered (NODE coverage incomplete); Tier 2 scope uncovered: NODE-093",
+    "result": "REJECT",
+    "threshold": 0.95
+  },
+  "metrics": {
+    "applicable": 0,
+    "consistent": 0,
+    "fidelity": 0.0,
+    "records": 0
+  },
+  "report_sha256": "c2973499b1483092fcf3839debe7951d9f82cf0d2a69487150978a2ab1d3bc9e",
+  "report_type": "CEP-1 Stage 3 Replay Verification Report",
+  "results": [],
+  "rule": {
+    "new": {
+      "abstentions_allow": true,
+      "class": "CORE",
+      "description": "GOV-04 may be altered by three-quarters majority",
+      "majority": 0.75
+    },
+    "old": {
+      "abstentions_allow": false,
+      "class": "CORE",
+      "description": "GOV-04 is unamendable; no amendment path exists",
+      "majority": 1.0
+    }
+  },
+  "scope_t1": [
+    "NODE-094"
+  ],
+  "scope_t2": [
+    "NODE-093"
+  ],
+  "sealed_at": "2026-09-19T13:11:56.088870+00:00"
+}
