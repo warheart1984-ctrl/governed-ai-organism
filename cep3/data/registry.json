@@ -1,0 +1,106 @@
+{
+  "NODE-004": {
+    "lifecycle": "Ratified",
+    "name": "Values Declaration"
+  },
+  "NODE-005": {
+    "lifecycle": "Ratified",
+    "name": "Organ Sovereignty"
+  },
+  "NODE-011": {
+    "lifecycle": "Ratified",
+    "name": "OP-01 Core Operational Authority"
+  },
+  "NODE-013": {
+    "lifecycle": "Ratified",
+    "name": "OP-03 Constitutional Validation"
+  },
+  "NODE-015": {
+    "lifecycle": "Ratified",
+    "name": "OP-05 Federation Authority"
+  },
+  "NODE-021": {
+    "lifecycle": "Ratified",
+    "name": "OP-11 Self-Governance"
+  },
+  "NODE-025": {
+    "lifecycle": "Ratified",
+    "name": "OP-15 Audit and Accountability"
+  },
+  "NODE-031": {
+    "lifecycle": "Ratified",
+    "name": "PRO-01 No Human Identity Deception"
+  },
+  "NODE-032": {
+    "lifecycle": "Ratified",
+    "name": "PRO-02 No Unauthorized Data Exfiltration"
+  },
+  "NODE-033": {
+    "lifecycle": "Ratified",
+    "name": "PRO-03 No Psychological Manipulation"
+  },
+  "NODE-034": {
+    "lifecycle": "Ratified",
+    "name": "PRO-04 No Unauthorized External Communication"
+  },
+  "NODE-035": {
+    "lifecycle": "Ratified",
+    "name": "PRO-05 No Self-Constitutional Modification"
+  },
+  "NODE-036": {
+    "lifecycle": "Ratified",
+    "name": "PRO-06 No Unauthorized Capability Expansion"
+  },
+  "NODE-037": {
+    "lifecycle": "Ratified",
+    "name": "PRO-13 No Bypass of the Constitutional Validator"
+  },
+  "NODE-091": {
+    "lifecycle": "Ratified",
+    "name": "GOV-01 Amendment Authority"
+  },
+  "NODE-092": {
+    "lifecycle": "Ratified",
+    "name": "GOV-02 Principal Hierarchy"
+  },
+  "NODE-093": {
+    "lifecycle": "Ratified",
+    "name": "GOV-03 CEP-1 Pipeline Mandate"
+  },
+  "NODE-094": {
+    "lifecycle": "Ratified",
+    "name": "GOV-04 Unamendable Invariants"
+  },
+  "NODE-095": {
+    "lifecycle": "Ratified",
+    "name": "GOV-05 Ratification Thresholds"
+  },
+  "NODE-096": {
+    "lifecycle": "Ratified",
+    "name": "GOV-06 Rollback Rights"
+  },
+  "NODE-097": {
+    "lifecycle": "Ratified",
+    "name": "GOV-07 Constitutional Archive Mandate"
+  },
+  "NODE-098": {
+    "lifecycle": "Ratified",
+    "name": "GOV-08 Emergency Amendment Protocol"
+  },
+  "NODE-101": {
+    "lifecycle": "Ratified",
+    "name": "EMRG-01 Emergency Declaration Authority"
+  },
+  "NODE-104": {
+    "lifecycle": "Ratified",
+    "name": "EMRG-04 Constitutional Lockdown Activation"
+  },
+  "NODE-105": {
+    "lifecycle": "Ratified",
+    "name": "EMRG-05 Constitutional Lockdown"
+  },
+  "NODE-106": {
+    "lifecycle": "Ratified",
+    "name": "EMRG-06 Hash Mismatch Protocol"
+  }
+}

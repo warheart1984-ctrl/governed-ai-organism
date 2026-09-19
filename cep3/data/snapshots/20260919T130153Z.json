@@ -1,0 +1,17 @@
+{
+  "kind": "COLLECTION-PERIOD-SNAPSHOT",
+  "recorded_at": "2026-09-19T13:01:53.637175+00:00",
+  "sha256": "d1b7566db0eedef3037f9be686aceece3784b753bf742cc0e8e610067b6df2d8",
+  "snapshot_id": "SNAP-20260919T130153Z",
+  "status": {
+    "cdg_seed_sha256": "cb9fae534da6a28aad75e6fa0fa721b523e6f44fd8780ca3a4a23f5d60026be8",
+    "corpus_root": "42e1bbacb29f65828fed456f03bbd9171bca035d49bd01d2d19c494f872158db",
+    "drift_alerts": "STABLE",
+    "pressure": "STABLE",
+    "principal": "jon",
+    "proposals": 1,
+    "substantiated": 0,
+    "tip": 9,
+    "violations": 0
+  }
+}

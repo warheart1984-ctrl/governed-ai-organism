@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+.keys/
+seed_text.txt
+
+# Local/editor/OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+
+# Local signing material and runtime-only secrets
+*.key
+*.pem
+*.secret
+*.token

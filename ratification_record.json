@@ -1,0 +1,13 @@
+{
+  "algorithm": "sha256",
+  "cdg_seed_file_sha256": "cb9fae534da6a28aad75e6fa0fa721b523e6f44fd8780ca3a4a23f5d60026be8",
+  "chain": "Every subsequent CDG version must be traceable to this root via the unbroken hash chain in the Pattern Ledger (CDG Seed File \u00a75.3; Constitution Art. IX GOV-07).",
+  "instrument": "AI Organism constitutional corpus root of trust",
+  "merkle_root": "42e1bbacb29f65828fed456f03bbd9171bca035d49bd01d2d19c494f872158db",
+  "principal": "jon",
+  "record_id": "REC-42E1BBACB29F",
+  "sealed_at": "2026-09-19T12:41:43.757693+00:00",
+  "signature": "501280ccdc052dd28e323e2be7f111e31fcefe43bde6298b49540b15ec5027e7",
+  "signature_status": "HMAC-SHA-256_SIGNED",
+  "verified_at": "2026-09-19T12:41:43.757693+00:00"
+}

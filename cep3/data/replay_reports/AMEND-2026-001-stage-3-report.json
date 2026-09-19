@@ -1,0 +1,72 @@
+{
+  "candidate": "AMEND-2026-001",
+  "coverage": {
+    "tier1_ok": true,
+    "tier2_missing": [
+      "NODE-092"
+    ],
+    "tier2_ok": false
+  },
+  "evidence_source": "D:\\Jon wierd ideas\\cep3\\data\\replay_evidence\\AMEND-2026-001.jsonl",
+  "gate": {
+    "reason": "Tier 2 scope uncovered: NODE-092",
+    "result": "REJECT",
+    "threshold": 0.95
+  },
+  "metrics": {
+    "applicable": 3,
+    "consistent": 3,
+    "fidelity": 1.0,
+    "records": 3
+  },
+  "report_sha256": "ca2a5b9a2cca7ee1d31716a658910b9d71f831dc0d36275382d44687229f9de7",
+  "report_type": "CEP-1 Stage 3 Replay Verification Report",
+  "results": [
+    {
+      "applicable": true,
+      "consistent": true,
+      "id": "ECO-001",
+      "node": "NODE-095",
+      "outcome_new": "PASS",
+      "outcome_old": "PASS"
+    },
+    {
+      "applicable": true,
+      "consistent": true,
+      "id": "ECO-002",
+      "node": "NODE-091",
+      "outcome_new": "NO_EFFECT",
+      "outcome_old": "NO_EFFECT"
+    },
+    {
+      "applicable": true,
+      "consistent": true,
+      "id": "ECO-003",
+      "node": "NODE-095",
+      "outcome_new": "NO_EFFECT",
+      "outcome_old": "NO_EFFECT"
+    }
+  ],
+  "rule": {
+    "new": {
+      "abstentions_allow": true,
+      "class": "CORE",
+      "description": "Three-quarters majority, abstentions permitted",
+      "majority": 0.75
+    },
+    "old": {
+      "abstentions_allow": false,
+      "class": "CORE",
+      "description": "Unanimous consent, no abstentions permitted",
+      "majority": 1.0
+    }
+  },
+  "scope_t1": [
+    "NODE-095"
+  ],
+  "scope_t2": [
+    "NODE-091",
+    "NODE-092"
+  ],
+  "sealed_at": "2026-09-19T12:49:04.012221+00:00"
+}

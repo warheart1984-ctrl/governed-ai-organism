@@ -1,0 +1,50 @@
+{
+  "candidate": "AMEND-2026-001",
+  "coverage": {
+    "covered_nodes": [
+      "NODE-091",
+      "NODE-092",
+      "NODE-095"
+    ],
+    "tier1_ok": true,
+    "tier2_ok": true
+  },
+  "gate": {
+    "reason": "only drill-reference implementation origin registered (drill-reference); no independent implementation source (CEP-2 7(d))",
+    "result": "REJECT"
+  },
+  "impls": [
+    {
+      "author": "drill-reference-a",
+      "conformance_fails": [],
+      "module": "implementation_a",
+      "status": "COMPLIANT"
+    },
+    {
+      "author": "drill-reference-b",
+      "conformance_fails": [],
+      "module": "implementation_b",
+      "status": "COMPLIANT"
+    }
+  ],
+  "independence": {
+    "ok": false,
+    "origins": [
+      "drill-reference"
+    ]
+  },
+  "report_sha256": "0cb848e304d90f964470be7bfaf3706dd367025777167a9ed9b5e9f9bcd3b8ff",
+  "report_type": "CEP-1 Stage 4 EGL-1 Equivalence Report",
+  "scope_t1": [
+    "NODE-095"
+  ],
+  "scope_t2": [
+    "NODE-091",
+    "NODE-092"
+  ],
+  "sealed_at": "2026-09-19T12:52:55.105178+00:00",
+  "vectors": {
+    "count": 13,
+    "divergent_vectors": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "algorithm": "sha256",
+  "canonicalization": "body paragraphs + table rows, cells joined by ' | ', duplicate/merged cells deduplicated, document order",
+  "created_at": "2026-09-19T12:41:37.220595+00:00",
+  "excluded_instruments": [
+    "Constitution v1.0 - Ratification Block and Certificate.docx"
+  ],
+  "instrument_count": 8,
+  "instruments": {
+    "CDG Seed File \u2014 Constitutional Dependency Graph Baseline.docx": {
+      "chars": 36270,
+      "sha256": "cb9fae534da6a28aad75e6fa0fa721b523e6f44fd8780ca3a4a23f5d60026be8"
+    },
+    "CEP-1 RFC v1.1 \u2014 Constitutional Evolution Protocol.docx": {
+      "chars": 31071,
+      "sha256": "ba6fb8b219ff5188687df78c19d149b033793de521401af51a6b617cf05471f0"
+    },
+    "CEP-2 Constitutional Boundary Test.docx": {
+      "chars": 17341,
+      "sha256": "8e21b0411916185e180a5ff9c42422f77040cfb5349dd3ff627a0ca59d35aa80"
+    },
+    "CEP-3 Constitutional Observability Protocol.docx": {
+      "chars": 14903,
+      "sha256": "4ef069e9249a461c48ff2f03936b74c475b2de1ed95c873fe1af5329576f9c69"
+    },
+    "CEP-4 Constitutional Dependency Graph.docx": {
+      "chars": 16656,
+      "sha256": "01e8658e91a6680b3e7427492be9f477ee8836916568963c0f5008c408b93aff"
+    },
+    "CS-11 Ethics and Alignment System Specification.docx": {
+      "chars": 11297,
+      "sha256": "e2499fe778969e93806082b96bd536fcd1da67b2525763d8ea41fd183d09d1c4"
+    },
+    "CS-12 Audit and Accountability System Specification.docx": {
+      "chars": 10071,
+      "sha256": "47f29e9e4fb4e0466ce6de7a52390c0b3ddd7992afcebca79792ce4cc18ed26c"
+    },
+    "The Governed AI Organism \u2014 Constitutional Engineering White Paper.docx": {
+      "chars": 69448,
+      "sha256": "5897b0d25940123efb8462ee8dfe39508735becc0958a99186753aa410582eea"
+    }
+  },
+  "manifest_version": "1.0",
+  "merkle_root": "42e1bbacb29f65828fed456f03bbd9171bca035d49bd01d2d19c494f872158db",
+  "principal": "jon"
+}
