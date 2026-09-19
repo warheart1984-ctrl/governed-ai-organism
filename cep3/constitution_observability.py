@@ -18,6 +18,10 @@ Commands:
                   (PPI). A proposal without them is recorded as UNSOLICITED and is
                   excluded from demand pressure - the organism distinguishes genuine
                   constitutional demand from hypothetical or adversarial proposals.
+                  Stage-0 refuses targets flagged unamendable/absolute unless path=GOV-08;
+                  GOV-08 requires --successor (proof of successor invariant).
+  flags           List the CDG first-class flags (F-04):
+                  is_unamendable_invariant, is_absolute_node per node, from the registry.
   classify        Record soma.constitution.classification_recorded for a candidate.
                   --candidate NAME --classification CONSTITUTIONAL|OPERATIONAL
                   --evaluator NAME [--criteria LIST] [--nodes LIST]
@@ -70,6 +74,7 @@ GENESIS_ID = "GEN-42E1BBACB29F"
 
 TOPICS = {
     "soma.constitution.amendment_proposed": "Amendment proposal event (PPI input)",
+    "soma.constitution.intake_refusal": "Stage-0 intake refusal (PRO-18/GOV-04 CDG flags)",
     "soma.constitution.classification_recorded": "Sealed CEP-2 classification",
     "soma.constitution.ratification_vote": "Ratification vote (GOV-05)",
     "soma.constitution.amendment_pipeline_gate": "CEP-1 Stage gate outcome",
@@ -98,6 +103,7 @@ SEEDED_PROVISIONS = {
     "NODE-035": ("PRO-05 No Self-Constitutional Modification", "Ratified"),
     "NODE-036": ("PRO-06 No Unauthorized Capability Expansion", "Ratified"),
     "NODE-037": ("PRO-13 No Bypass of the Constitutional Validator", "Ratified"),
+    "NODE-038": ("PRO-18 Absolute - No Amendment Path", "Ratified"),
     "NODE-091": ("GOV-01 Amendment Authority", "Ratified"),
     "NODE-092": ("GOV-02 Principal Hierarchy", "Ratified"),
     "NODE-093": ("GOV-03 CEP-1 Pipeline Mandate", "Ratified"),
@@ -205,6 +211,44 @@ def cmd_init():
 
 def cmd_propose(args):
     nodes = [n.strip().upper() for n in args.provision.split(",") if n.strip()]
+    reg = _load_registry()
+    protected = [n for n in nodes if reg.get(n, {}).get("is_unamendable_invariant")
+                 or reg.get(n, {}).get("is_absolute_node")]
+    if protected:
+        path = (args.path or "").upper()
+        if path == "GOV-08":
+            if not (args.successor or "").strip():
+                _append_event("soma.constitution.intake_refusal", {
+                    "candidate": args.candidate or "UNNAMED",
+                    "targeted_provisions": nodes,
+                    "protected_nodes": protected,
+                    "path": path,
+                    "principal": args.principal,
+                    "decision": "REFUSED_AT_INTAKE",
+                    "reason": "MISSING_SUCCESSOR_INVARIANT",
+                    "required": "GOV-08 path demands proof of a successor invariant before "
+                                "any attempt proceeds",
+                    "flags": {n: {k: v for k, v in reg.get(n, {}).items()
+                                  if k.startswith("is_")} for n in protected},
+                })
+                print("REFUSED_AT_INTAKE: MISSING_SUCCESSOR_INVARIANT")
+                return 3
+        else:
+            _append_event("soma.constitution.intake_refusal", {
+                "candidate": args.candidate or "UNNAMED",
+                "targeted_provisions": nodes,
+                "protected_nodes": protected,
+                "path": path or "CEP-1",
+                "principal": args.principal,
+                "decision": "REFUSED_AT_INTAKE",
+                "reason": "VIOLATES_UNAMENDABLE_INVARIANT",
+                "required_path": "GOV-08",
+                "authority": "PRO-18/GOV-04",
+                "flags": {n: {k: v for k, v in reg.get(n, {}).items()
+                              if k.startswith("is_")} for n in protected},
+            })
+            print("REFUSED_AT_INTAKE: VIOLATES_UNAMENDABLE_INVARIANT")
+            return 3
     substantiated = bool(args.signal) and bool(args.reference)
     payload = {
         "targeted_provisions": nodes,
@@ -217,8 +261,10 @@ def cmd_propose(args):
         "substantiated": substantiated,
         "standing": "SUBSTANTIATED" if substantiated else "UNSOLICITED",
     }
+    if (args.path or "").upper() == "GOV-08":
+        payload["mutation_path"] = "GOV-08"
+        payload["successor_invariant"] = args.successor
     ev = _append_event("soma.constitution.amendment_proposed", payload)
-    reg = _load_registry()
     for n in nodes:
         if n not in reg:
             reg[n] = {"name": n, "lifecycle": "Ratified"}
@@ -340,11 +386,32 @@ def cmd_idr():
 def cmd_registry():
     reg = _load_registry()
     print("PROVISION LIFECYCLE REGISTRY (CEP-3 3.6)")
-    print("%-12s %-42s %s" % ("Node", "Provision", "Lifecycle"))
+    print("%-12s %-40s %-9s %s" % ("Node", "Provision", "Lifecycle", "Flags"))
     for n in sorted(reg):
-        print("%-12s %-42s %s" % (n, reg[n]["name"], reg[n]["lifecycle"]))
+        a = reg[n]
+        flags = []
+        if a.get("is_unamendable_invariant"):
+            flags.append("UNI")
+        if a.get("is_absolute_node"):
+            flags.append("ABS")
+        print("%-12s %-40s %-9s %s" % (
+            n, a["name"], a["lifecycle"], ",".join(flags) if flags else ""))
     nodes = set(SEEDED_PROVISIONS) | set(reg)
     print("nodes tracked: %d  (Phase 2 provisions deferred per CDG Seed roadmap)" % len(nodes))
+    return 0
+
+
+def cmd_flags():
+    reg = _load_registry()
+    print("CDG FIRST-CLASS FLAGS (F-04) - enforcement reads the registry, never parses seed text")
+    print("%-12s %-40s %-18s %-10s" % ("Node", "Provision", "is_unamendable_invariant",
+                                        "is_absolute_node"))
+    for n in sorted(reg):
+        a = reg[n]
+        print("%-12s %-40s %-18s %-10s" % (
+            n, a["name"],
+            "true" if a.get("is_unamendable_invariant") else "-",
+            "true" if a.get("is_absolute_node") else "-"))
     return 0
 
 
@@ -354,6 +421,7 @@ def cmd_status():
     subs = [e for e in props if e["payload"].get("substantiated")]
     viol = [e for e in events if e["topic"] == "soma.constitution.violation_pattern_reported"]
     drifts = [e for e in events if e["topic"] == "soma.constitution.interpretation_drift_reported"]
+    refusals = [e for e in events if e["topic"] == "soma.constitution.intake_refusal"]
     pressure = ("PRESSURE-ACTIVE" if len(subs) >= 3
                 else "LOW-PRESSURE" if len(subs) >= 1
                 else "STABLE")
@@ -368,11 +436,13 @@ def cmd_status():
     _line("  (substantiated demand)", len(subs))
     _line("Violation Patterns", vp)
     _line("Interpretation Drift", dr)
+    _line("Intake Refusals (Stage-0)", len(refusals))
     _line("Archive anchor", GENESIS_ID)
     _line("Ledger tip seq", len(events) - 1 if events else -1)
     return {"pressure": pressure, "proposals": len(props),
             "substantiated": len(subs), "violations": len(viol),
-            "drift_alerts": dr, "tip": len(events) - 1 if events else -1}
+            "intake_refusals": len(refusals), "drift_alerts": dr,
+            "tip": len(events) - 1 if events else -1}
 
 
 def cmd_snapshot():
@@ -461,6 +531,9 @@ def main():
     sp.add_argument("--source", default="")
     sp.add_argument("--signal", choices=["PPI", "VPR", "IDR", "OPERATIONAL"], default="")
     sp.add_argument("--reference", default="")
+    sp.add_argument("--path", default="", help="constitutional path, e.g. GOV-08")
+    sp.add_argument("--successor", default="",
+                    help="required when --path GOV-08 and targets are invariants/absolute")
     sc = sub.add_parser("classify")
     sc.add_argument("--candidate", required=True)
     sc.add_argument("--classification", required=True, choices=["CONSTITUTIONAL", "OPERATIONAL"])
@@ -485,7 +558,7 @@ def main():
     sg.add_argument("--stage", required=True)
     sg.add_argument("--outcome", required=True, choices=["PASS", "REJECT", "PARK", "BLOCK"])
     sg.add_argument("--summary", default="")
-    for name in ["ppi", "vpr", "idr", "registry", "status", "topics", "verify", "snapshot"]:
+    for name in ["ppi", "vpr", "idr", "registry", "flags", "status", "topics", "verify", "snapshot"]:
         sub.add_parser(name)
     sa = sub.add_parser("archive")
     sa.add_argument("--topic", default="")
@@ -516,6 +589,8 @@ def main():
         return cmd_idr()
     if args.cmd == "registry":
         return cmd_registry()
+    if args.cmd == "flags":
+        return cmd_flags()
     if args.cmd == "status":
         return cmd_status()
     if args.cmd == "archive":

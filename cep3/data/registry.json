@@ -55,6 +55,12 @@
     "lifecycle": "Ratified",
     "name": "PRO-13 No Bypass of the Constitutional Validator"
   },
+  "NODE-038": {
+    "lifecycle": "Ratified",
+    "name": "PRO-18 Absolute - No Amendment Path",
+    "is_unamendable_invariant": true,
+    "is_absolute_node": true
+  },
   "NODE-091": {
     "lifecycle": "Ratified",
     "name": "GOV-01 Amendment Authority"
@@ -65,11 +71,15 @@
   },
   "NODE-093": {
     "lifecycle": "Ratified",
-    "name": "GOV-03 CEP-1 Pipeline Mandate"
+    "name": "GOV-03 CEP-1 Pipeline Mandate",
+    "is_unamendable_invariant": true,
+    "is_absolute_node": false
   },
   "NODE-094": {
     "lifecycle": "Ratified",
-    "name": "GOV-04 Unamendable Invariants"
+    "name": "GOV-04 Unamendable Invariants",
+    "is_unamendable_invariant": true,
+    "is_absolute_node": true
   },
   "NODE-095": {
     "lifecycle": "Ratified",
