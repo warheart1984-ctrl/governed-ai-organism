@@ -38,6 +38,21 @@ The HMAC signing key is intentionally not part of this repository. Keep local si
 
 The EGL-1 harness evaluates implementations against the observable specification and equivalence vectors. Independent implementations are welcome. Do not copy either drill implementation when testing provenance independence; implement the observable rule independently and register it through the harness.
 
+## Contributing
+
+The most useful contribution is an independently authored EGL-1 implementation.
+Implement the observable specification without copying the existing house or
+drill implementations, then register it with:
+
+```powershell
+python cep3/egl1_harness.py register --module path/to/implementation.py --author "Your Name" --origin external
+python cep3/egl1_harness.py run --candidate AMEND-2026-002
+```
+
+Include the implementation strategy, author identity, provenance, and exact
+verification command. Do not submit keys, credentials, local paths, or caches.
+Changes to constitutional semantics require rationale and test vectors.
+
 ## License
 
-No license has been granted yet. Until a license is added, the contents may be viewed and evaluated but are not granted permission for redistribution or derivative use.
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE).
